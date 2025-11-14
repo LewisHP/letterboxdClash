@@ -35,6 +35,3 @@ build/
 ### Frontend ###
 frontend/node_modules/
 frontend/build/
-
-### Sensitive Configuration ###
-**/application.properties
