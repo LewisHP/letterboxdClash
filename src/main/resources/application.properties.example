@@ -3,4 +3,5 @@ spring.application.name=letterboxdClash
 # TMDB API Configuration
 # Get your API key from: https://www.themoviedb.org/settings/api
 # Copy this file to application.properties and add your API key
-tmdb.api.key=YOUR_TMDB_API_KEY_HERE
+# ${TMDB_API_KEY:fallback} will use environment variable in production, fallback locally
+tmdb.api.key=${TMDB_API_KEY:YOUR_TMDB_API_KEY_HERE}

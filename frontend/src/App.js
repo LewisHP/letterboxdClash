@@ -173,46 +173,33 @@ function App() {
   if (gameState === 'input') {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>Letterboxd Clash</h1>
-          <p>Guess if the next film has a higher, same, or lower rating!</p>
+        <header className="App-header fade-in">
+          <h1 className="game-title">Letterboxd Clash</h1>
+          <p style={{ fontSize: '18px', marginBottom: '20px', opacity: 0.8 }}>
+            Guess if the next film has a higher, same, or lower rating!
+          </p>
 
-          <div style={{ marginTop: '40px' }}>
+          <div className="input-container">
             <input
               type="text"
+              className="username-input"
               placeholder="Enter Letterboxd username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && fetchFilms()}
               disabled={loading}
-              style={{
-                padding: '12px 20px',
-                fontSize: '16px',
-                borderRadius: '5px',
-                border: '2px solid #61dafb',
-                marginRight: '10px',
-                width: '250px'
-              }}
             />
             <button
+              className="game-button button-primary"
               onClick={fetchFilms}
               disabled={loading}
-              style={{
-                padding: '12px 30px',
-                fontSize: '16px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                backgroundColor: '#61dafb',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold'
-              }}
             >
               {loading ? 'Loading Films...' : 'Start Game'}
             </button>
           </div>
 
           {error && (
-            <div style={{ marginTop: '20px', color: '#ff6b6b', fontSize: '14px' }}>
+            <div className="error-message fade-in">
               {error}
             </div>
           )}
@@ -224,39 +211,22 @@ function App() {
   if (gameState === 'gameover') {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>Game Over!</h1>
-          <h2 style={{ color: '#61dafb', fontSize: '48px', margin: '20px 0' }}>
+        <header className="App-header fade-in">
+          <h1 className="game-title">Game Over!</h1>
+          <div className="game-over-score">
             Streak: {streak}
-          </h2>
+          </div>
 
-          <div style={{ marginTop: '30px' }}>
+          <div className="button-container">
             <button
+              className="game-button button-primary"
               onClick={playAgain}
-              style={{
-                padding: '12px 30px',
-                fontSize: '16px',
-                cursor: 'pointer',
-                backgroundColor: '#61dafb',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                marginRight: '10px'
-              }}
             >
               Play Again
             </button>
             <button
+              className="game-button button-secondary"
               onClick={resetGame}
-              style={{
-                padding: '12px 30px',
-                fontSize: '16px',
-                cursor: 'pointer',
-                backgroundColor: '#ff6b6b',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold'
-              }}
             >
               Change Username
             </button>
@@ -270,11 +240,11 @@ function App() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Letterboxd Clash</h1>
-          <div style={{ fontSize: '24px', marginBottom: '20px', color: '#61dafb' }}>
+          <h1 className="game-title">Letterboxd Clash</h1>
+          <div className="streak-counter">
             Streak: {streak}
           </div>
-          <div style={{ marginTop: '40px', fontSize: '18px' }}>
+          <div className="loading-text">
             Loading posters...
           </div>
         </header>
@@ -285,103 +255,76 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Letterboxd Clash</h1>
-        <div style={{ fontSize: '24px', marginBottom: '20px', color: '#61dafb' }}>
+        <h1 className="game-title">Letterboxd Clash</h1>
+        <div className="streak-counter">
           Streak: {streak}
         </div>
 
-        <div style={{ display: 'flex', gap: '40px', alignItems: 'center', marginTop: '20px' }}>
+        <div className="film-container">
           {/* Current Film - Rating Visible */}
-          <div style={{ textAlign: 'center' }}>
+          <div className="film-card fade-in">
             <img
               src={currentFilm.image}
               alt={currentFilm.title}
-              style={{ width: '150px', height: '225px', objectFit: 'cover', borderRadius: '8px' }}
+              className="film-poster"
             />
-            <h3 style={{ maxWidth: '150px', fontSize: '14px', margin: '10px 0' }}>
+            <h3 className="film-title">
               {currentFilm.title}
             </h3>
-            <div style={{ fontSize: '24px', color: '#ffd700' }}>
+            <div className="rating-stars">
               {'★'.repeat(Math.floor(currentFilm.rating))}
               {currentFilm.rating % 1 !== 0 && '½'}
             </div>
-            <div style={{ fontSize: '18px', marginTop: '5px' }}>
+            <div className="rating-number">
               {currentFilm.rating} / 5
             </div>
           </div>
 
-          <div style={{ fontSize: '48px', color: '#61dafb' }}>VS</div>
+          <div className="vs-text">VS</div>
 
           {/* Next Film - Rating Hidden Until Revealed */}
-          <div style={{ textAlign: 'center' }}>
+          <div className="film-card fade-in">
             <img
               src={nextFilm.image}
               alt={nextFilm.title}
-              style={{ width: '150px', height: '225px', objectFit: 'cover', borderRadius: '8px' }}
+              className="film-poster"
             />
-            <h3 style={{ maxWidth: '150px', fontSize: '14px', margin: '10px 0' }}>
+            <h3 className="film-title">
               {nextFilm.title}
             </h3>
             {revealed ? (
-              <>
-                <div style={{ fontSize: '24px', color: '#ffd700' }}>
+              <div className="rating-reveal">
+                <div className="rating-stars">
                   {'★'.repeat(Math.floor(nextFilm.rating))}
                   {nextFilm.rating % 1 !== 0 && '½'}
                 </div>
-                <div style={{ fontSize: '18px', marginTop: '5px' }}>
+                <div className="rating-number">
                   {nextFilm.rating} / 5
                 </div>
-              </>
+              </div>
             ) : (
-              <div style={{ fontSize: '24px', color: '#999' }}>???</div>
+              <div className="rating-stars" style={{ color: '#999' }}>???</div>
             )}
           </div>
         </div>
 
         {!revealed && (
-          <div style={{ marginTop: '40px', display: 'flex', gap: '15px' }}>
+          <div className="button-container fade-in">
             <button
+              className="game-button button-higher"
               onClick={() => handleGuess('higher')}
-              style={{
-                padding: '15px 40px',
-                fontSize: '18px',
-                cursor: 'pointer',
-                backgroundColor: '#4CAF50',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                color: 'white'
-              }}
             >
               Higher
             </button>
             <button
+              className="game-button button-same"
               onClick={() => handleGuess('same')}
-              style={{
-                padding: '15px 40px',
-                fontSize: '18px',
-                cursor: 'pointer',
-                backgroundColor: '#FFC107',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                color: 'white'
-              }}
             >
               Same
             </button>
             <button
+              className="game-button button-lower"
               onClick={() => handleGuess('lower')}
-              style={{
-                padding: '15px 40px',
-                fontSize: '18px',
-                cursor: 'pointer',
-                backgroundColor: '#f44336',
-                border: 'none',
-                borderRadius: '5px',
-                fontWeight: 'bold',
-                color: 'white'
-              }}
             >
               Lower
             </button>
