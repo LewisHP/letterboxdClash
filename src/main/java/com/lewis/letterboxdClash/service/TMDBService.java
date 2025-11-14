@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,8 +20,13 @@ public class TMDBService {
     private static final String TMDB_BASE_URL = "https://api.themoviedb.org/3";
     private static final String TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
     private final Map<String, String> posterCache = new HashMap<>();
+
+    @Autowired
+    public TMDBService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     /**
      * Searches for a film by title and returns the poster URL

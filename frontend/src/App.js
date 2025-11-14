@@ -86,7 +86,7 @@ function App() {
     let attempts = 0;
 
     // Try up to 10 times to find two films with posters
-    while (!filmsWithPosters && attempts < 10) {
+    while (!filmsWithPosters && attempts < 50) {
       const film1 = rated[Math.floor(Math.random() * rated.length)];
       const film2 = getRandomFilm(rated, film1);
 
@@ -176,7 +176,7 @@ function App() {
         <header className="App-header fade-in">
           <h1 className="game-title">Letterboxd Clash</h1>
           <p style={{ fontSize: '18px', marginBottom: '20px', opacity: 0.8 }}>
-            Guess if the next film has a higher, same, or lower rating!
+            How well do you know your Letterboxd ratings?
           </p>
 
           <div className="input-container">
