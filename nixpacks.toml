@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = ["nodejs_20", "maven"]
+
+[phases.install]
+cmds = ["cd frontend && npm ci"]
+
+[phases.build]
+cmds = [
+  "cd frontend && npm run build",
+  "cp -r frontend/build/* src/main/resources/static/",
+  "./mvnw clean package -DskipTests"
+]
+
+[start]
+cmd = "java -jar target/letterboxdClash-0.0.1-SNAPSHOT.jar"
