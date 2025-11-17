@@ -30,7 +30,12 @@ public class FilmController {
      */
     @GetMapping("/{username}")
     public List<Film> getFilmsByUsername(@PathVariable String username) {
-        return filmService.getFilms(username);
+        System.out.println("=== Getting films for username: " + username + " ===");
+        List<Film> films = filmService.getFilms(username);
+        System.out.println("Total films found: " + films.size());
+        long ratedFilms = films.stream().filter(f -> f.getRating() != null).count();
+        System.out.println("Films with ratings: " + ratedFilms);
+        return films;
     }
 
     /**
