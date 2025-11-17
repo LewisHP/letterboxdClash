@@ -14,8 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 @Service
 public class TMDBService {
 
-    @Value("${tmdb.api.key}")
-    private String apiKey;
+    private final String apiKey;
 
     private static final String TMDB_BASE_URL = "https://api.themoviedb.org/3";
     private static final String TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -27,13 +26,16 @@ public class TMDBService {
     public TMDBService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
 
+        // Read directly from environment variable
+        this.apiKey = System.getenv("TMDB_API_KEY");
+
         // Validate API key is set
         if (apiKey == null || apiKey.trim().isEmpty()) {
             System.err.println("WARNING: TMDB_API_KEY environment variable is not set!");
             System.err.println("Poster images will not be available.");
             System.err.println("Please set TMDB_API_KEY in Railway environment variables.");
         } else {
-            System.out.println("TMDB API Key configured successfully");
+            System.out.println("TMDB API Key configured successfully (length: " + apiKey.length() + ")");
         }
     }
 
