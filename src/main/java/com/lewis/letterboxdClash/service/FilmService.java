@@ -99,7 +99,7 @@ public class FilmService {
                 String imageUrl = extractImageUrl(filmElement);
                 Double rating = extractRating(filmElement);
 
-                System.out.println("DEBUG: Extracted film - Title: " + title + ", Image: " + imageUrl + ", Rating: " + rating);
+                //System.out.println("DEBUG: Extracted film - Title: " + title + ", Image: " + imageUrl + ", Rating: " + rating);
                 films.add(new Film(title, imageUrl, rating));
             } catch (Exception e) {
                 System.err.println("Error extracting film data: " + e.getMessage());

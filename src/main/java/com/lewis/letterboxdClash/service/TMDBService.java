@@ -60,6 +60,9 @@ public class TMDBService {
             String searchUrl = TMDB_BASE_URL + "/search/movie"
                     + "?api_key=" + apiKey
                     + "&query=" + cleanTitle.replace(" ", "%20");
+                    
+        
+            System.out.println("SEARCH URL: " + searchUrl);
 
             // Make API call
             JsonNode response = restTemplate.getForObject(searchUrl, JsonNode.class);
