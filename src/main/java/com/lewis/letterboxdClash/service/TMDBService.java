@@ -26,6 +26,15 @@ public class TMDBService {
     @Autowired
     public TMDBService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+
+        // Validate API key is set
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            System.err.println("WARNING: TMDB_API_KEY environment variable is not set!");
+            System.err.println("Poster images will not be available.");
+            System.err.println("Please set TMDB_API_KEY in Railway environment variables.");
+        } else {
+            System.out.println("TMDB API Key configured successfully");
+        }
     }
 
     /**
