@@ -368,7 +368,7 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .App-header {
-    padding: 15px;
+    padding: 10px;
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
   }
@@ -384,24 +384,25 @@
   }
 
   .film-container {
-    gap: 30px;
+    gap: 15px;
     margin: 20px 0;
+    flex-wrap: nowrap; /* Keep films side by side */
   }
 
   .film-card {
-    padding: 15px;
+    padding: 12px;
   }
 
   .film-poster {
-    width: 120px;
-    height: 180px;
+    width: 110px;
+    height: 165px;
   }
 
   .film-title {
-    max-width: 120px;
-    min-height: 35px;
-    font-size: 12px;
-    margin: 10px 0 6px 0;
+    max-width: 110px;
+    min-height: 32px;
+    font-size: 11px;
+    margin: 8px 0 6px 0;
   }
 
   .rating-stars {
@@ -414,7 +415,8 @@
   }
 
   .vs-text {
-    font-size: 36px;
+    font-size: 28px;
+    margin: 0 5px;
   }
 
   .button-container {
@@ -463,26 +465,36 @@
 
 /* Extra small phones */
 @media (max-width: 380px) {
+  .App-header {
+    padding: 8px;
+  }
+
   .game-title {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .film-poster {
-    width: 100px;
-    height: 150px;
+    width: 90px;
+    height: 135px;
   }
 
   .film-title {
-    max-width: 100px;
-    font-size: 11px;
+    max-width: 90px;
+    font-size: 10px;
+    min-height: 30px;
   }
 
   .film-container {
-    gap: 20px;
+    gap: 10px;
+  }
+
+  .film-card {
+    padding: 10px;
   }
 
   .vs-text {
-    font-size: 28px;
+    font-size: 24px;
+    margin: 0 3px;
   }
 
   .rating-stars {
