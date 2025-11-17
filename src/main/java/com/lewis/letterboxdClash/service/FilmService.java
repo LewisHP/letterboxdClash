@@ -67,7 +67,9 @@ public class FilmService {
      * @return Film with poster URL populated
      */
     public Film getFilmWithPoster(Film film) {
+        System.out.println("FilmService.getFilmWithPoster called for: " + film.getTitle());
         String posterUrl = tmdbService.getPosterUrl(film.getTitle());
+        System.out.println("Got poster URL: " + posterUrl);
         film.setImage(posterUrl);
         return film;
     }
