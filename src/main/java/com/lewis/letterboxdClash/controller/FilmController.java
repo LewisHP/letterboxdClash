@@ -30,12 +30,7 @@ public class FilmController {
      */
     @GetMapping("/{username}")
     public List<Film> getFilmsByUsername(@PathVariable String username) {
-        System.out.println("=== Getting films for username: " + username + " ===");
-        List<Film> films = filmService.getFilms(username);
-        System.out.println("Total films found: " + films.size());
-        long ratedFilms = films.stream().filter(f -> f.getRating() != null).count();
-        System.out.println("Films with ratings: " + ratedFilms);
-        return films;
+        return filmService.getFilms(username);
     }
 
     /**
@@ -48,20 +43,12 @@ public class FilmController {
      */
     @PostMapping("/posters")
     public List<Film> getPostersForFilms(@RequestBody List<Film> films) {
-        try {
-            System.out.println("=== POSTERS ENDPOINT CALLED with " + films.size() + " films ===");
-            return films.stream()
-                    .map(film -> {
-                        System.out.println("Processing film: " + film.getTitle());
-                        filmService.getFilmWithPoster(film);
-                        return film;
-                    })
-                    .filter(film -> film.getImage() != null) // Only return films with posters
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            System.err.println("ERROR in getPostersForFilms: " + e.getMessage());
-            e.printStackTrace();
-            throw e;
-        }
+        return films.stream()
+                .map(film -> {
+                    filmService.getFilmWithPoster(film);
+                    return film;
+                })
+                .filter(film -> film.getImage() != null) // Only return films with posters
+                .collect(Collectors.toList());
     }
 }

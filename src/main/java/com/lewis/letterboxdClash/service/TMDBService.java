@@ -24,20 +24,8 @@ public class TMDBService {
 
     @Autowired
     public TMDBService(RestTemplate restTemplate) {
-        System.out.println("HERE");
         this.restTemplate = restTemplate;
-
-        // Read directly from environment variable
         this.apiKey = System.getenv("TMDB_API_KEY");
-
-        // Validate API key is set
-        if (apiKey == null || apiKey.trim().isEmpty()) {
-            System.err.println("WARNING: TMDB_API_KEY environment variable is not set!");
-            System.err.println("Poster images will not be available.");
-            System.err.println("Please set TMDB_API_KEY in Railway environment variables.");
-        } else {
-            System.out.println("TMDB API Key configured successfully (length: " + apiKey.length() + ")");
-        }
     }
 
     /**
@@ -48,7 +36,6 @@ public class TMDBService {
      * @return Poster URL or null if not found
      */
     public String getPosterUrl(String title) {
-        System.out.println("HELLO");
         // Check cache first
         if (posterCache.containsKey(title)) {
             return posterCache.get(title);
@@ -62,9 +49,6 @@ public class TMDBService {
             String searchUrl = TMDB_BASE_URL + "/search/movie"
                     + "?api_key=" + apiKey
                     + "&query=" + cleanTitle.replace(" ", "%20");
-                    
-        
-            System.out.println("SEARCH URL: " + searchUrl);
 
             // Make API call
             JsonNode response = restTemplate.getForObject(searchUrl, JsonNode.class);
@@ -82,18 +66,14 @@ public class TMDBService {
 
                         // Cache the result
                         posterCache.put(title, posterUrl);
-
-                        System.out.println("Found poster for: " + title + " -> " + posterUrl);
                         return posterUrl;
                     }
                 }
             }
 
-            System.out.println("No poster found for: " + title);
             return null;
 
         } catch (Exception e) {
-            System.err.println("Error fetching poster for '" + title + "': " + e.getMessage());
             return null;
         }
     }
