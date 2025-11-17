@@ -48,14 +48,20 @@ public class FilmController {
      */
     @PostMapping("/posters")
     public List<Film> getPostersForFilms(@RequestBody List<Film> films) {
-        System.out.println("=== POSTERS ENDPOINT CALLED with " + films.size() + " films ===");
-        return films.stream()
-                .map(film -> {
-                    System.out.println("Processing film: " + film.getTitle());
-                    filmService.getFilmWithPoster(film);
-                    return film;
-                })
-                .filter(film -> film.getImage() != null) // Only return films with posters
-                .collect(Collectors.toList());
+        try {
+            System.out.println("=== POSTERS ENDPOINT CALLED with " + films.size() + " films ===");
+            return films.stream()
+                    .map(film -> {
+                        System.out.println("Processing film: " + film.getTitle());
+                        filmService.getFilmWithPoster(film);
+                        return film;
+                    })
+                    .filter(film -> film.getImage() != null) // Only return films with posters
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            System.err.println("ERROR in getPostersForFilms: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 }
