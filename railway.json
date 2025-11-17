@@ -1,7 +1,7 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "buildCommand": "./mvnw clean package -DskipTests"
+    "buildCommand": "cd frontend && npm install && npm run build && cd .. && cp -r frontend/build/* src/main/resources/static/ && ./mvnw clean package -DskipTests"
   },
   "deploy": {
     "startCommand": "java -jar target/letterboxdClash-0.0.1-SNAPSHOT.jar",
