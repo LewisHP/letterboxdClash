@@ -24,6 +24,7 @@ public class TMDBService {
 
     @Autowired
     public TMDBService(RestTemplate restTemplate) {
+        System.out.println("HERE");
         this.restTemplate = restTemplate;
 
         // Read directly from environment variable
@@ -47,6 +48,7 @@ public class TMDBService {
      * @return Poster URL or null if not found
      */
     public String getPosterUrl(String title) {
+        System.out.println("HELLO");
         // Check cache first
         if (posterCache.containsKey(title)) {
             return posterCache.get(title);
