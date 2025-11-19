@@ -368,9 +368,10 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .App-header {
-    padding: 10px;
+    padding: 15px 15px; /* Horizontal and vertical padding */
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    box-sizing: border-box;
   }
 
   .game-title {
@@ -386,11 +387,14 @@
   .film-container {
     gap: 15px;
     margin: 20px 0;
-    flex-wrap: nowrap; /* Keep films side by side */
+    flex-wrap: nowrap !important; /* Keep films side by side */
+    max-width: calc(100vw - 30px); /* Account for screen margins */
+    overflow-x: visible;
   }
 
   .film-card {
     padding: 12px;
+    flex-shrink: 0; /* Prevent cards from shrinking */
   }
 
   .film-poster {
@@ -466,7 +470,7 @@
 /* Extra small phones */
 @media (max-width: 380px) {
   .App-header {
-    padding: 8px;
+    padding: 12px;
   }
 
   .game-title {
